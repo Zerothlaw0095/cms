@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Junior Engineer Complaint Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2 {
+            text-align: center;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        textarea {
+            resize: vertical;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        #complaintList {
+            margin-top: 20px;
+        }
+
+        .complaint {
+            background: #e9ecef;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Complaint Submission</h1>
+        <form id="complaintForm">
+            <label for="complaintText">Enter your complaint:</label>
+            <textarea id="complaintText" name="complaintText" rows="4" required></textarea>
+            <button type="submit">Submit</button>
+        </form>
+        <h2>Complaints</h2>
+        <div id="complaintList">
+            {{#each complaints}}
+            <div class="complaint">
+                {{{this}}}
+            </div>
+            {{/each}}
+        </div>
+    </div>
+    <script>
+        document.getElementById('complaintForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get the complaint text
+            const complaintText = document.getElementById('complaintText').value;
+            
+            // Create a new div element for the complaint
+            const complaintDiv = document.createElement('div');
+            complaintDiv.classList.add('complaint');
+            complaintDiv.textContent = complaintText;
+            
+            // Append the new complaint to the complaint list
+            document.getElementById('complaintList').appendChild(complaintDiv);
+            
+            // Clear the textarea
+            document.getElementById('complaintForm').reset();
+        });
+    </script>
+</body>
+</html>
